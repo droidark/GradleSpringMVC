@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'jetty'
+
+//	JDK 8
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories{
+	jcenter()
+}
+
+
+dependencies{
+	compile 'ch.qos.logback:logback-classic:1.1.7'
+	compile 'org.springframework:spring-webmvc:4.3.2.RELEASE'
+	compile 'javax.servlet:jstl:1.2'
+	compile 'junit:junit:4.12'
+	compile 'javax.servlet:javax.servlet-api:3.1.0'
+	compile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
+}
+
+//	Embeded Jetty for testing
+jettyRun{
+	contextPath = "spring4"
+	httpPort = 9999
+}
+
+jettyRunWar{
+	contextPath = "spring4"
+	httpPort = 9999
+}
+
+//	For Eclipse IDE only
+eclipse{
+	wtp{
+		component{
+			//	define context path, default to project folder name
+			contextPath = 'spring4'
+		}
+	}
+}
